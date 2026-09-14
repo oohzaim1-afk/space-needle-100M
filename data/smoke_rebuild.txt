@@ -1,0 +1,8 @@
+# Fresh rebuild smoke test — 2026-09-14 18:58
+# source: code/bb6gmp.c (sha256 d24769d23fce76c26917791b783e495a...)
+# build: gcc -O2 -o bb6gmp_smoke bb6gmp.c -lgmp   [gcc 15.2.0, Ubuntu 26.04 LTS (WSL2)]
+# run:   ./bb6gmp_smoke 2500000 250000 smoke_rebuild.csv
+# compared vs original run (data/gmp_100M.csv): checkpoints n = 250,000 ... 2,500,000
+# fields: bit-length, running max v2, FNV-1a 64
+# RESULT: 10/10 match, 0 mismatch
+# wall: ~74 s (same machine as original run)

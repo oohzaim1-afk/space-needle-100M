@@ -1,0 +1,40 @@
+### ref_traj.py | Space Needle recurrence | independent run
+utc                 : 2026-09-11T19:56:01Z
+python              : 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+sys.platform        : win32
+executable          : C:\Python312\python.exe
+N steps requested   : 1000000
+probe math.log(2**4096) = 2839.130851574
+self-tests v_and_odd : OK
+
+prefix recompute    : 6, 10, 17, 41, 101, 251, 626, 1095, 2736, 2995
+prefix published    : 6, 10, 17, 41, 101, 251, 626, 1095, 2736, 2995
+prefix assert       : OK
+
+run finished        : M = 1000000 mises a jour appliquees (b_0 -> b_1000000)
+halted early        : no
+phase2 wall time    : 68.323 s
+n_ratios measured   : 999991
+last term           : 283396 decimal digits | bit_length 941419 | log10 ~ 283395.209030
+last term head      : 161819134276796578918746996997253493964697365988
+last term tail      : 218205325854598624937085538129508762713114018629
+
+empirical means (phase2 window, 999991 transitions):
+  mean ln(G)        = 0.652539451894
+  mean ln(G)^2      = 0.513020369442
+  var  ln(G)        = 0.087212633164 (sd 0.295317851076)
+closed form (k=0..60):
+  E[ln G]           = 0.652354547813
+  E[ln G^2]         = 0.512897726345
+  var               = 0.087331270292 (sigma 0.295518646268)
+  z(mean lnG)       = 0.626
+  z(mean lnG^2)     = 0.361
+end-to-end mean ln growth (b0->b_1000000 over 1000000 steps) = 0.652539791979
+
+prediction N = 17000000 :
+  digits ~ N*c/ln10           = 4816337.7
+  digits ~ (ln b0 + N*c)/ln10 = 4816338.4
+  sd digits (1 sigma)         = 529.2
+v max = 17 at n=158831 ; v obs = 999991
+chi2(v hist vs 2^-(k+1)) = 7.90 (df=17, pooled from k=17)
+total compute time  : 68.413 s

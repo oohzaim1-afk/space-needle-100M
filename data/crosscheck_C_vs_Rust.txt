@@ -1,0 +1,8 @@
+# Cross-check — C+GMP (bb6gmp) vs Rust num-bigint (bb6tools recur_log)
+# fields compared: term, bit-length, running max v2, FNV-1a 64 of limbs
+# generated 2026-09-14 18:58
+
+rows compared: 93 | match: 93 | mismatch: 0
+
+Also: both implementations print 'V2RECORD v2=25 at n=23145881'.
+Checkpoint n=23,250,000: identical FNV-1a 64 = 00f1dc201ed33796 (both).
