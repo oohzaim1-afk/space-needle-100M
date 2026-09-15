@@ -5,7 +5,7 @@ genere 2026-09-14 14:01:28
 - Debut ~2026-09-12 11:26 | Cloture ~2026-09-14 03:32:55 | duree t=144375 s = 40.10 h
 - Termes: 100,000,000 / 100,000,000 | debit moyen 692.6 termes/s
 - RESULTAT: AUCUNE HALTE — aucune puissance de 2 atteinte en 100M de termes (odd part jamais = 1)
-- v2 max: 25 @ n=23,145,881 (13 records) | reference publiee: 24 @ ~17M (Doucette) -> etendue x5.9
+- v2 max: 25 @ n=23,145,881 (13 records) | reference publique: 24 @ >17M (BusyBeaverWiki rev. 7571) -> etendue x5.9
 - b final: 94,125,050 bits (~11.8 Mo)
 - Fichiers: gmp_100M.csv (400 checkpoints /250k), gmp_100M_stdout.txt
 - sha256 csv    = 2dd4c88d169f5db331598d49a7773504a18f6dd621d15482f9b497915adb3169

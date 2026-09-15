@@ -1,8 +1,12 @@
-# Fresh rebuild smoke test — 2026-09-14 18:58
-# source: code/bb6gmp.c (sha256 d24769d23fce76c26917791b783e495a...)
+# Fresh rebuild smoke test — 2026-09-14 21:23 (rebuilt post-audit)
+# source: code/bb6gmp.c (sha256 8bfa58fbc54725c05837aa0f8734da98d28c32666a467b31e347c55a286ef5ca)
 # build: gcc -O2 -o bb6gmp_smoke bb6gmp.c -lgmp   [gcc 15.2.0, Ubuntu 26.04 LTS (WSL2)]
 # run:   ./bb6gmp_smoke 2500000 250000 smoke_rebuild.csv
 # compared vs original run (data/gmp_100M.csv): checkpoints n = 250,000 ... 2,500,000
 # fields: bit-length, running max v2, FNV-1a 64
-# RESULT: 10/10 match, 0 mismatch
-# wall: ~74 s (same machine as original run)
+# RESULT: 10/10 rows identical (0 mismatches).
+# Changes vs the original build: the CSV starts with a
+# "# n,bits,max_v2_so_far,fnv1a64,elapsed_s" header line; output file opened
+# in "w" mode (idempotent re-runs: second run produced the same 11 lines);
+# the final term (position N+1) is now tested explicitly after the main loop:
+#   final n=2500001 bits=2354150 v2=0 power_of_2=0

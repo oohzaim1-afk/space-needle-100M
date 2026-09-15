@@ -1,0 +1,7 @@
+# Space Needle (BB(6)) — final term after 100000000 updates (position 100000001)
+# canonical encoding: big-endian minimal bytes (11765632 bytes, 94125050 bits)
+627e09c5bb1fbf93fe18ed3f2a2feaff45a16f139282364e07831337766acce1  final_term.bin
+# decimal-string encoding (28334464 digits, ASCII, no separators); hash only
+ab859e95a0106e16dc52a4d6dda8d9d8373c778da508aebe878e8b32c655b0b8  final_term.dec.txt
+# FNV-1a 64 over little-endian 64-bit limbs: fd4332e892cc1fab
+# v2(final)=0  power_of_2=False

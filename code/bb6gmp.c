@@ -3,6 +3,9 @@
 // where m = odd part of b (b = 2^v2 * m).  HALT condition: b is a power of 2.
 // Checkpoints: term, bit-length, running max v2, FNV-1a over little-endian
 // 64-bit limbs (same convention as the Rust num-bigint implementation).
+// The output CSV starts with a "# n,bits,max_v2_so_far,fnv1a64,elapsed_s"
+// header line, and the final term (position N+1) is tested explicitly after
+// the main loop (fixes added 2026-09-14 after an independent audit).
 //
 // usage: bb6gmp <N> <check_every> <out.csv>
 #include <gmp.h>
@@ -30,8 +33,9 @@ int main(int argc, char **argv) {
     unsigned long long N = strtoull(argv[1], 0, 10);
     unsigned long long ce = strtoull(argv[2], 0, 10);
     if (ce == 0) ce = 250000;
-    FILE *f = fopen(argv[3], "a");
+    FILE *f = fopen(argv[3], "w");
     if (!f) { perror("fopen"); return 1; }
+    fprintf(f, "# n,bits,max_v2_so_far,fnv1a64,elapsed_s\n");
 
     printf("sizeof(mp_limb_t)=%zu\n", sizeof(mp_limb_t));
     fflush(stdout);
@@ -43,6 +47,7 @@ int main(int argc, char **argv) {
     struct timespec t0;
     clock_gettime(CLOCK_MONOTONIC, &t0);
     int max_v2 = 0;
+    int halted = 0;
     unsigned long long i;
     for (i = 1; i <= N; i++) {
         int tz = (int)mpz_scan1(b, 0);
@@ -56,6 +61,7 @@ int main(int argc, char **argv) {
             printf("HALT_CONDITION_MET at n=%llu\n", i);
             fprintf(f, "HALT_CONDITION_MET,n=%llu\n", i);
             fflush(f);
+            halted = 1;
             break;
         }
         mpz_sub_ui(t, m, 1);              /* t = m-1 */
@@ -73,6 +79,21 @@ int main(int argc, char **argv) {
             printf("ck n=%llu bits=%zu t=%.0f\n", i, mpz_sizeinbase(b, 2), el);
             fflush(stdout);
         }
+    }
+    if (!halted) {
+        /* Final term (position N+1).  The loop above tested positions 1..N
+           (pre-update terms); this explicit test of the last produced term
+           was added 2026-09-14 after an independent audit found the gap. */
+        int tzf = (int)mpz_scan1(b, 0);
+        mpz_tdiv_q_2exp(m, b, tzf);
+        int pow2 = (mpz_cmp_ui(m, 1) == 0);
+        printf("final n=%llu bits=%zu v2=%d power_of_2=%d\n",
+               N + 1, mpz_sizeinbase(b, 2), tzf, pow2);
+        if (pow2) {
+            printf("HALT_CONDITION_MET at n=%llu (final term)\n", N + 1);
+            fprintf(f, "HALT_CONDITION_MET,n=%llu\n", N + 1);
+        }
+        fflush(stdout);
     }
     printf("done N=%llu\n", N);
     return 0;

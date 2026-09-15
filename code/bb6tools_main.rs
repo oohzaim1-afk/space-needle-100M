@@ -772,6 +772,33 @@ fn do_seq(n: u64) {
     }
 }
 
+/// Exact decimal digit count of b: floor(log10(b)) + 1.
+/// f64 estimate from the top 64 bits; exact big-int verification in the
+/// (astronomically rare) near-integer boundary case.
+fn decimal_digits(b: &BigUint) -> u64 {
+    let bits = b.bits();
+    if bits <= 64 {
+        return b.to_u64_digits().first().map_or(1, |x| x.to_string().len() as u64);
+    }
+    let shift = bits - 64;
+    let top = (b >> (shift as usize)).to_u64_digits()[0];
+    // log10(b) = shift*log10(2) + log10(top), top in [2^63, 2^64)
+    let lg = shift as f64 * 0.30102999566398119521 + (top as f64).log10();
+    let d = lg.floor() as u64 + 1;
+    let frac = lg - lg.floor();
+    if frac < 1e-6 || frac > 1.0 - 1e-6 {
+        // near an integer boundary: verify exactly against powers of ten
+        let p = BigUint::from(10u32).pow((d - 1) as u32);
+        if *b < p {
+            return d - 1;
+        }
+        if *b >= &p * 10u32 {
+            return d + 1;
+        }
+    }
+    d
+}
+
 fn do_recur_log(n: u64, outfile: &str, check_every: u64) {
     use std::fs::OpenOptions;
     use std::io::Write;
@@ -809,8 +836,7 @@ fn do_recur_log(n: u64, outfile: &str, check_every: u64) {
         let t = ((m - 1u32) * 3u32) >> 1usize;
         b = b + tz + t;
         if i % check_every == 0 {
-            // log10 estimate: exact decimal conversion is too slow at multi-million digits
-            let digits = (b.bits() as f64 * 0.30102999566398119521) as u64 + 1;
+            let digits = decimal_digits(&b);
             let mut hsh = 0xcbf29ce484222325u64;
             for w in b.to_u64_digits() {
                 hsh ^= w;
