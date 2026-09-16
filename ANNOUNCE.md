@@ -22,4 +22,4 @@ Code, logs, checkpoints, final value, SHA-256s: **https://github.com/oohzaim1-af
 
 One-liner variant:
 
-> Space Needle computed to 10^8 terms: no power of 2, new max v2 = 25 (first at n = 23,145,881; previous max documented 24); full final value published with SHA-256; full-range cross-check between two implementations; ~40 h naive vs ~22 min block-affine. Code/logs/hashes: https://github.com/oohzaim1-afk/space-needle-100M
+> Space Needle computed to 10^8 terms: no power of 2, new max v2 = 25 (first at n = 23,145,881; previous max documented 24); full final value published with SHA-256; full-range cross-check between two implementations (C+GMP per-term + block-affine re-derivation); ~40 h naive vs ~22 min block-affine. Code/logs/hashes: https://github.com/oohzaim1-afk/space-needle-100M

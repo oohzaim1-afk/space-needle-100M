@@ -5,7 +5,7 @@
 
 **Machine:** `1RB1LA_1LC0RE_1LF1LD_0RB0LA_1RC1RE_---0LD` — "Space Needle", a BB(6) cryptid (BMO problem 6). Discovered by mxdys (Jan 2025); low-level rules by mxdys; higher-level rules by Racheline and Katelyn Doucette.
 
-**Result (September 2026):** the associated sequence (reduced form below) has been computed to **100,000,000 terms**. **No power of 2 was encountered** — the halting condition is never met. The maximum factor-of-2 record is **v2 = 25**, first occurring at n = 23,145,881 (1-based term index; see "Indexing conventions"). The previous documented state was >17,000,000 terms with max v2 = 24 (BusyBeaverWiki "Space Needle", revision 7571 of 2026-05-18 — retrieved 2026-09-14).
+**Result (September 2026):** the associated sequence (reduced form below) has been computed to **100,000,000 terms**. **No power of 2 was encountered** — no halt occurred anywhere in the computed range. The maximum factor-of-2 record is **v2 = 25**, first occurring at n = 23,145,881 (1-based term index; see "Indexing conventions"). The previous documented state was >17,000,000 terms with max v2 = 24 (BusyBeaverWiki "Space Needle", revision 7571 of 2026-05-18 — retrieved 2026-09-14).
 
 **Final term:** 94,125,050 bits = **28,334,464 decimal digits** (exact), FNV-1a 64 hash of limbs `fd4332e892cc1fab`, **published in full** as `data/final_term_100M.bin` — SHA-256 `627e09c5bb1fbf93fe18ed3f2a2feaff45a16f139282364e07831337766acce1` (canonical encoding: big-endian minimal bytes, 11,765,632 bytes).
 
